@@ -130,15 +130,16 @@ namespace SimpleNotepad
 
         private void menuStrip1_Paint(object sender, PaintEventArgs e)
         {
+            Color white = Color.FromArgb(250, 250, 250);
+            Color blue = Color.FromArgb(210, 220, 240);
             LinearGradientBrush linearGradientBrush = new LinearGradientBrush(
-                menuStrip1.ClientRectangle, Color.Red, Color.Yellow, 45);
+                menuStrip1.ClientRectangle, Color.Red, Color.Yellow, 90);
 
             ColorBlend cblend = new ColorBlend(3);
-            cblend.Colors = new Color[3] { Color.Red, Color.Yellow, Color.Green };
-            cblend.Positions = new float[3] { 0f, 0.5f, 1f };
+            cblend.Colors = new Color[3] { white, blue, white };
+            cblend.Positions = new float[3] { 0f, 0.7f, 1f };
 
             linearGradientBrush.InterpolationColors = cblend;
-
             e.Graphics.FillRectangle(linearGradientBrush, menuStrip1.ClientRectangle);
         }
     }
