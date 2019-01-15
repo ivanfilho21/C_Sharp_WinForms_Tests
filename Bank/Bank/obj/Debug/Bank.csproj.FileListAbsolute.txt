@@ -1,0 +1,10 @@
+C:\Users\Ivan\source\repos\Bank\Bank\obj\Debug\Bank.csprojAssemblyReference.cache
+C:\Users\Ivan\source\repos\Bank\Bank\obj\Debug\Bank.Form1.resources
+C:\Users\Ivan\source\repos\Bank\Bank\obj\Debug\Bank.NewAccount.resources
+C:\Users\Ivan\source\repos\Bank\Bank\obj\Debug\Bank.Properties.Resources.resources
+C:\Users\Ivan\source\repos\Bank\Bank\obj\Debug\Bank.csproj.GenerateResource.cache
+C:\Users\Ivan\source\repos\Bank\Bank\obj\Debug\Bank.csproj.CoreCompileInputs.cache
+C:\Users\Ivan\source\repos\Bank\Bank\bin\Debug\Bank.exe
+C:\Users\Ivan\source\repos\Bank\Bank\bin\Debug\Bank.pdb
+C:\Users\Ivan\source\repos\Bank\Bank\obj\Debug\Bank.exe
+C:\Users\Ivan\source\repos\Bank\Bank\obj\Debug\Bank.pdb
