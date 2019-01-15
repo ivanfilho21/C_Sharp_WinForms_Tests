@@ -11,29 +11,118 @@ namespace SimpleNotepad
 {
     public partial class Form1 : Form
     {
+        private const string PROGRAM_NAME = "SimpleNotepad";
+        private const string FILTER_TEXT_EXTENSIONS = "Text Files |*.txt";
+        private const string UNTITLED_TEXT = "Untitled";
+
+        private string fileName;
+        private string fileFullPath;
+
         public Form1()
         {
             InitializeComponent();
+
+            fileName = UNTITLED_TEXT;
+            UpdateTitle();
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        private void UpdateTitle()
         {
-
+            this.Text = fileName + " - " + PROGRAM_NAME;
         }
 
-        private void openToolStripMenuItem1_Click(object sender, EventArgs e)
+        private string ShortenFileName()
         {
-
+            var fullName = fileFullPath.Split('\\');
+            var lastName = fullName[fullName.Length - 1].Split('.');
+            return lastName[0];
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(richTextBox.Text))
+                return;
 
+            // Todo: ask the user to save his current work.
+            // in case there are changes to the file
+
+            if (!SaveDialog())
+                return;
+
+            fileFullPath = "";
+            fileName = UNTITLED_TEXT;
+            UpdateTitle();
+            richTextBox.Text = "";
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            // Todo: ask the user to save his current work.
+            // in case there are changes to the file
 
+            openFileDialog.Filter = FILTER_TEXT_EXTENSIONS;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileFullPath = openFileDialog.FileName;
+                fileName = ShortenFileName();
+
+                richTextBox.LoadFile(openFileDialog.FileName, RichTextBoxStreamType.PlainText);
+
+                UpdateTitle();
+            }
+        }
+
+        private bool SaveDialog()
+        {
+            string msg = "Would you like to save changes in " + fileName + "?";
+            string title = PROGRAM_NAME;
+            var ret = MessageBox.Show(msg, title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+            switch(ret)
+            {
+                case DialogResult.Yes:
+                    SaveFile(false);
+                    break;
+                case DialogResult.No:
+                    break;
+                case DialogResult.Cancel:
+                    return false;
+            }
+            return true;
+        }
+
+        private void SaveFile(bool saveAs)
+        {
+            saveFileDialog.Filter = FILTER_TEXT_EXTENSIONS;
+            if (string.IsNullOrEmpty(fileFullPath) || saveAs)
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK &&
+                saveFileDialog.FileName.Length > 0)
+                {
+                    fileFullPath = saveFileDialog.FileName;
+                    fileName = ShortenFileName();
+
+                    richTextBox.SaveFile(fileFullPath, RichTextBoxStreamType.PlainText);
+                    UpdateTitle();
+                }
+            }
+            else
+            {
+                fileName = ShortenFileName();
+                richTextBox.SaveFile(fileFullPath, RichTextBoxStreamType.PlainText);
+                UpdateTitle();
+            }
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFile(false);
+        }
+
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFile(true);
         }
 
         private void pageSetupToolStripMenuItem_Click(object sender, EventArgs e)
@@ -141,6 +230,8 @@ namespace SimpleNotepad
 
             linearGradientBrush.InterpolationColors = cblend;
             e.Graphics.FillRectangle(linearGradientBrush, menuStrip1.ClientRectangle);
+
+            richTextBox.Focus();
         }
     }
 }
