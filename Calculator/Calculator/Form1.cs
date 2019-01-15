@@ -15,7 +15,7 @@ namespace Calculator
 
         enum Operation
         {
-            none, sum, sub, mult, div, err
+            None, Addition, Subtraction, Multiplication, Division, Error, Percentage
         }
 
         private Operation _operation;
@@ -133,7 +133,7 @@ namespace Calculator
             Button b = (Button)sender;
             var buttonText = b.Text;
 
-            if (_operation == Operation.err)
+            if (_operation == Operation.Error)
             {
                 InitializeOperands();
                 canAppend = false;
@@ -163,13 +163,13 @@ namespace Calculator
             switch (b.Text)
             {
                 case "+":
-                    ChangeOperation(Operation.sum); break;
+                    ChangeOperation(Operation.Addition); break;
                 case "-":
-                    ChangeOperation(Operation.sub); break;
+                    ChangeOperation(Operation.Subtraction); break;
                 case "*":
-                    ChangeOperation(Operation.mult); break;
+                    ChangeOperation(Operation.Multiplication); break;
                 case "/":
-                    ChangeOperation(Operation.div); break;
+                    ChangeOperation(Operation.Division); break;
                 default:
                     // Debug
                     // MessageBox.Show("Invalid option: " + b.Text, "OperandButtonMouseClick");
@@ -190,9 +190,16 @@ namespace Calculator
             LoseFocus();
         }
 
+        private void PercentButtonClick(object sender, EventArgs e)
+        {
+            DoOperation(false, false);
+            operand[0].Value /= 100;
+            resultLabel.Text = "" + operand[0].Value;
+        }
+
         private bool ChangeOperation(Operation op)
         {
-            if (_operation == Operation.none || finishedOperation)
+            if (_operation == Operation.None || finishedOperation)
             {
                 _operation = op;
                 return true;
@@ -216,7 +223,7 @@ namespace Calculator
                 n2 = operand[1].Value;
             else
             {
-                if (_operation == Operation.div)
+                if (_operation == Operation.Division)
                 {
                     if (sourceResult)
                     {
@@ -230,29 +237,29 @@ namespace Calculator
                     }
                         //n2 = 1;
                 }
-                else if (_operation == Operation.mult) n2 = 1;
+                else if (_operation == Operation.Multiplication) n2 = 1;
             }
 
             double result = 0;
 
             switch (_operation)
             {
-                case Operation.sum:
+                case Operation.Addition:
                     result = operand[0].Value + n2;
                     break;
-                case Operation.sub:
+                case Operation.Subtraction:
                     result = operand[0].Value - n2;
                     break;
-                case Operation.mult:
+                case Operation.Multiplication:
                     result = operand[0].Value * n2;
                     break;
-                case Operation.div:
+                case Operation.Division:
                     if (n2 != 0)
                         result = operand[0].Value / n2;
                     else
                     {
                         resultLabel.Text = "Cannot divide by zero.";
-                        _operation = Operation.err;
+                        _operation = Operation.Error;
                         return;
                     }
                     break;
@@ -269,7 +276,7 @@ namespace Calculator
                 finishedOperation = true;
             }
             
-            if (_operation == Operation.mult && !sourceChangeOp) // maybe verify finished operation...
+            if (_operation == Operation.Multiplication && !sourceChangeOp) // maybe verify finished operation...
                 operand[1].Value = result;
             else
                 operand[0].Value = result;
@@ -285,7 +292,7 @@ namespace Calculator
         private void ClearButtonClick(object sender, EventArgs e)
         {
             InitializeOperands();
-            _operation = Operation.none;
+            _operation = Operation.None;
             canAppend = true;
             finishedOperation = false;
 
@@ -340,6 +347,7 @@ namespace Calculator
         {
             panel1.Focus();
         }
+
     }
 
 }

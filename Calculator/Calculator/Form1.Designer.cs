@@ -36,7 +36,7 @@ namespace Calculator
             this.button22 = new System.Windows.Forms.Button();
             this.delButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
+            this.percentButton = new System.Windows.Forms.Button();
             this.decimalButton = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
@@ -66,7 +66,7 @@ namespace Calculator
             this.panel1.Controls.Add(this.button22);
             this.panel1.Controls.Add(this.delButton);
             this.panel1.Controls.Add(this.clearButton);
-            this.panel1.Controls.Add(this.button19);
+            this.panel1.Controls.Add(this.percentButton);
             this.panel1.Controls.Add(this.decimalButton);
             this.panel1.Controls.Add(this.button10);
             this.panel1.Controls.Add(this.button13);
@@ -140,6 +140,7 @@ namespace Calculator
             // 
             // delButton
             // 
+            this.delButton.Enabled = false;
             this.delButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.delButton.ForeColor = System.Drawing.Color.Red;
             this.delButton.Location = new System.Drawing.Point(114, 61);
@@ -164,18 +165,18 @@ namespace Calculator
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.ClearButtonClick);
             // 
-            // button19
+            // percentButton
             // 
-            this.button19.Enabled = false;
-            this.button19.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button19.Location = new System.Drawing.Point(216, 61);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(45, 32);
-            this.button19.TabIndex = 18;
-            this.button19.TabStop = false;
-            this.button19.Text = "%";
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperandButtonMouseClick);
+            this.percentButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.percentButton.Location = new System.Drawing.Point(216, 61);
+            this.percentButton.Name = "percentButton";
+            this.percentButton.Size = new System.Drawing.Size(45, 32);
+            this.percentButton.TabIndex = 18;
+            this.percentButton.TabStop = false;
+            this.percentButton.Text = "%";
+            this.percentButton.UseVisualStyleBackColor = true;
+            this.percentButton.Click += new System.EventHandler(this.PercentButtonClick);
+            this.percentButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperandButtonMouseClick);
             // 
             // decimalButton
             // 
@@ -421,7 +422,7 @@ namespace Calculator
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button percentButton;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button delButton;
         private System.Windows.Forms.Button clearButton;
