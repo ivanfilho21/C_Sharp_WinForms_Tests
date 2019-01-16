@@ -51,11 +51,11 @@
             this.finishButton = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.currentAccRadioButton = new System.Windows.Forms.RadioButton();
-            this.savingsAccRadioButton = new System.Windows.Forms.RadioButton();
             this.accInfoPanel = new System.Windows.Forms.Panel();
-            this.accInfoLabel = new System.Windows.Forms.Label();
             this.accInfoTitleLabel = new System.Windows.Forms.Label();
+            this.accInfoLabel = new System.Windows.Forms.Label();
+            this.savingsAccRadioButton = new System.Windows.Forms.RadioButton();
+            this.currentAccRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.accInfoPanel.SuspendLayout();
@@ -259,16 +259,32 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Account Type";
             // 
-            // currentAccRadioButton
+            // accInfoPanel
             // 
-            this.currentAccRadioButton.AutoSize = true;
-            this.currentAccRadioButton.Location = new System.Drawing.Point(32, 32);
-            this.currentAccRadioButton.Name = "currentAccRadioButton";
-            this.currentAccRadioButton.Size = new System.Drawing.Size(102, 17);
-            this.currentAccRadioButton.TabIndex = 0;
-            this.currentAccRadioButton.TabStop = true;
-            this.currentAccRadioButton.Text = "Current Account";
-            this.currentAccRadioButton.UseVisualStyleBackColor = true;
+            this.accInfoPanel.Controls.Add(this.accInfoTitleLabel);
+            this.accInfoPanel.Controls.Add(this.accInfoLabel);
+            this.accInfoPanel.Location = new System.Drawing.Point(160, 10);
+            this.accInfoPanel.Name = "accInfoPanel";
+            this.accInfoPanel.Size = new System.Drawing.Size(411, 121);
+            this.accInfoPanel.TabIndex = 2;
+            // 
+            // accInfoTitleLabel
+            // 
+            this.accInfoTitleLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.accInfoTitleLabel.Location = new System.Drawing.Point(6, 4);
+            this.accInfoTitleLabel.Name = "accInfoTitleLabel";
+            this.accInfoTitleLabel.Size = new System.Drawing.Size(402, 23);
+            this.accInfoTitleLabel.TabIndex = 1;
+            this.accInfoTitleLabel.Text = "Account Type Name:";
+            // 
+            // accInfoLabel
+            // 
+            this.accInfoLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.accInfoLabel.Location = new System.Drawing.Point(6, 24);
+            this.accInfoLabel.Name = "accInfoLabel";
+            this.accInfoLabel.Size = new System.Drawing.Size(402, 95);
+            this.accInfoLabel.TabIndex = 0;
+            this.accInfoLabel.Text = resources.GetString("accInfoLabel.Text");
             // 
             // savingsAccRadioButton
             // 
@@ -281,32 +297,16 @@
             this.savingsAccRadioButton.Text = "Savings Account";
             this.savingsAccRadioButton.UseVisualStyleBackColor = true;
             // 
-            // accInfoPanel
+            // currentAccRadioButton
             // 
-            this.accInfoPanel.Controls.Add(this.accInfoTitleLabel);
-            this.accInfoPanel.Controls.Add(this.accInfoLabel);
-            this.accInfoPanel.Location = new System.Drawing.Point(160, 10);
-            this.accInfoPanel.Name = "accInfoPanel";
-            this.accInfoPanel.Size = new System.Drawing.Size(411, 121);
-            this.accInfoPanel.TabIndex = 2;
-            // 
-            // accInfoLabel
-            // 
-            this.accInfoLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accInfoLabel.Location = new System.Drawing.Point(6, 24);
-            this.accInfoLabel.Name = "accInfoLabel";
-            this.accInfoLabel.Size = new System.Drawing.Size(402, 95);
-            this.accInfoLabel.TabIndex = 0;
-            this.accInfoLabel.Text = resources.GetString("accInfoLabel.Text");
-            // 
-            // accInfoTitleLabel
-            // 
-            this.accInfoTitleLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accInfoTitleLabel.Location = new System.Drawing.Point(6, 4);
-            this.accInfoTitleLabel.Name = "accInfoTitleLabel";
-            this.accInfoTitleLabel.Size = new System.Drawing.Size(402, 23);
-            this.accInfoTitleLabel.TabIndex = 1;
-            this.accInfoTitleLabel.Text = "Account Type Name:";
+            this.currentAccRadioButton.AutoSize = true;
+            this.currentAccRadioButton.Location = new System.Drawing.Point(32, 32);
+            this.currentAccRadioButton.Name = "currentAccRadioButton";
+            this.currentAccRadioButton.Size = new System.Drawing.Size(102, 17);
+            this.currentAccRadioButton.TabIndex = 0;
+            this.currentAccRadioButton.TabStop = true;
+            this.currentAccRadioButton.Text = "Current Account";
+            this.currentAccRadioButton.UseVisualStyleBackColor = true;
             // 
             // NewAccount
             // 

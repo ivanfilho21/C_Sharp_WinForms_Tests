@@ -32,9 +32,11 @@
             this.ribbon1 = new System.Windows.Forms.Ribbon();
             this.accountTab = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
-            this.addAccButton = new System.Windows.Forms.RibbonButton();
             this.systemTab = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
+            this.addAccButton = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton2 = new System.Windows.Forms.RibbonButton();
             this.quitButton = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
@@ -70,17 +72,10 @@
             // 
             this.ribbonPanel2.ButtonMoreVisible = false;
             this.ribbonPanel2.Items.Add(this.addAccButton);
+            this.ribbonPanel2.Items.Add(this.ribbonButton1);
+            this.ribbonPanel2.Items.Add(this.ribbonButton2);
             this.ribbonPanel2.Name = "ribbonPanel2";
-            this.ribbonPanel2.Text = "";
-            // 
-            // addAccButton
-            // 
-            this.addAccButton.Image = global::Bank.Properties.Resources.plus__1_;
-            this.addAccButton.LargeImage = global::Bank.Properties.Resources.plus__1_;
-            this.addAccButton.Name = "addAccButton";
-            this.addAccButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("addAccButton.SmallImage")));
-            this.addAccButton.Text = "New";
-            this.addAccButton.Click += new System.EventHandler(this.NewAccountRibbonButton_Click);
+            this.ribbonPanel2.Text = "Operations";
             // 
             // systemTab
             // 
@@ -94,13 +89,41 @@
             this.ribbonPanel1.Name = "ribbonPanel1";
             this.ribbonPanel1.Text = "";
             // 
+            // addAccButton
+            // 
+            this.addAccButton.Image = global::Bank.Properties.Resources.add;
+            this.addAccButton.LargeImage = global::Bank.Properties.Resources.add;
+            this.addAccButton.Name = "addAccButton";
+            this.addAccButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("addAccButton.SmallImage")));
+            this.addAccButton.Text = "New";
+            this.addAccButton.Click += new System.EventHandler(this.NewAccountRibbonButton_Click);
+            // 
+            // ribbonButton1
+            // 
+            this.ribbonButton1.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.Image")));
+            this.ribbonButton1.LargeImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.LargeImage")));
+            this.ribbonButton1.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Medium;
+            this.ribbonButton1.Name = "ribbonButton1";
+            this.ribbonButton1.SmallImage = global::Bank.Properties.Resources.edit_16;
+            this.ribbonButton1.Text = "Edit";
+            // 
+            // ribbonButton2
+            // 
+            this.ribbonButton2.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton2.Image")));
+            this.ribbonButton2.LargeImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton2.LargeImage")));
+            this.ribbonButton2.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Medium;
+            this.ribbonButton2.Name = "ribbonButton2";
+            this.ribbonButton2.SmallImage = global::Bank.Properties.Resources.trash_16;
+            this.ribbonButton2.Text = "Delete";
+            // 
             // quitButton
             // 
-            this.quitButton.Image = global::Bank.Properties.Resources.plus__1_;
-            this.quitButton.LargeImage = global::Bank.Properties.Resources.plus__1_;
+            this.quitButton.Image = ((System.Drawing.Image)(resources.GetObject("quitButton.Image")));
+            this.quitButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("quitButton.LargeImage")));
             this.quitButton.Name = "quitButton";
             this.quitButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("quitButton.SmallImage")));
             this.quitButton.Text = "Quit";
+            this.quitButton.TextAlignment = System.Windows.Forms.RibbonItem.RibbonItemTextAlignment.Center;
             this.quitButton.Click += new System.EventHandler(this.QuitRibbonButton_Click);
             // 
             // Form1
@@ -125,6 +148,8 @@
         private System.Windows.Forms.RibbonButton quitButton;
         private System.Windows.Forms.RibbonPanel ribbonPanel2;
         private System.Windows.Forms.RibbonButton addAccButton;
+        private System.Windows.Forms.RibbonButton ribbonButton1;
+        private System.Windows.Forms.RibbonButton ribbonButton2;
     }
 }
 
