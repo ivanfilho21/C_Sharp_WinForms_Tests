@@ -24,6 +24,8 @@ namespace SimpleNotepad
 
             fileName = UNTITLED_TEXT;
             UpdateTitle();
+
+            pasteToolStripMenuItem.Enabled = Clipboard.ContainsText();
         }
 
         private void UpdateTitle()
@@ -135,37 +137,37 @@ namespace SimpleNotepad
 
         }
 
-        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
-        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            richTextBox.Undo();
         }
 
-        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RedoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            richTextBox.Redo();
         }
 
-        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            richTextBox.Cut();
         }
 
-        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            richTextBox.Copy();
         }
 
-        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            richTextBox.Paste(DataFormats.GetFormat(DataFormats.Text));
         }
 
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (richTextBox.SelectionLength == 0)
                 richTextBox.SelectionLength += 1;
@@ -192,9 +194,9 @@ namespace SimpleNotepad
 
         }
 
-        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            richTextBox.SelectAll();
         }
 
         private void dateTimeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -202,22 +204,36 @@ namespace SimpleNotepad
 
         }
 
-        private void wordWrapToolStripMenuItem_Click(object sender, EventArgs e)
+        private void WordWrapToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            richTextBox.WordWrap = !richTextBox.WordWrap;
+            wordWrapToolStripMenuItem.Checked = richTextBox.WordWrap;
         }
 
-        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FontToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            fontDialog.Font = richTextBox.Font;
+            if (fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox.Font = fontDialog.Font;
+            }
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Developed by Ivan.", "About");
         }
 
-        private void menuStrip1_Paint(object sender, PaintEventArgs e)
+        private void RichTextBox_TextChanged(object sender, EventArgs e)
+        {
+            undoToolStripMenuItem.Enabled = richTextBox.CanUndo;
+            redoToolStripMenuItem.Enabled = richTextBox.CanRedo;
+            pasteToolStripMenuItem.Enabled = Clipboard.ContainsText();
+
+            copyToolStripMenuItem.Enabled = richTextBox.SelectedText.Length > 0;
+        }
+
+        private void MenuStrip1_Paint(object sender, PaintEventArgs e)
         {
             Color white = Color.FromArgb(250, 250, 250);
             Color blue = Color.FromArgb(210, 220, 240);
@@ -233,5 +249,6 @@ namespace SimpleNotepad
 
             richTextBox.Focus();
         }
+
     }
 }
