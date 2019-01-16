@@ -8,3 +8,5 @@ C:\Users\Ivan\source\repos\Bank\Bank\bin\Debug\Bank.exe
 C:\Users\Ivan\source\repos\Bank\Bank\bin\Debug\Bank.pdb
 C:\Users\Ivan\source\repos\Bank\Bank\obj\Debug\Bank.exe
 C:\Users\Ivan\source\repos\Bank\Bank\obj\Debug\Bank.pdb
+C:\Users\Ivan\source\repos\Bank\Bank\bin\Debug\System.Windows.Forms.Ribbon.dll
+C:\Users\Ivan\source\repos\Bank\Bank\obj\Debug\Bank.csproj.CopyComplete

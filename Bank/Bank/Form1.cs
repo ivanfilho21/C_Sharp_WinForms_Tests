@@ -11,14 +11,14 @@ namespace Bank
     public partial class Form1 : Form
     {
         // Just for testing, this array of Accounts will be used.
-
+        Account[] accounts;
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void NewAccountToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewAccountRibbonButton_Click(object sender, EventArgs e)
         {
             NewAccount form = new NewAccount(this)
             {
@@ -36,7 +36,7 @@ namespace Bank
             }
         }
 
-        private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void QuitRibbonButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }

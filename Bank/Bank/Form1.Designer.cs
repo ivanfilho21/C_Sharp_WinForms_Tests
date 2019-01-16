@@ -28,98 +28,103 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.ribbon1 = new System.Windows.Forms.Ribbon();
+            this.accountTab = new System.Windows.Forms.RibbonTab();
+            this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
+            this.addAccButton = new System.Windows.Forms.RibbonButton();
+            this.systemTab = new System.Windows.Forms.RibbonTab();
+            this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
+            this.quitButton = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // ribbon1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.accountToolStripMenuItem,
-            this.systemToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(601, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.ribbon1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.ribbon1.Location = new System.Drawing.Point(0, 0);
+            this.ribbon1.Minimized = false;
+            this.ribbon1.Name = "ribbon1";
             // 
-            // accountToolStripMenuItem
             // 
-            this.accountToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newAccountToolStripMenuItem,
-            this.listToolStripMenuItem});
-            this.accountToolStripMenuItem.Name = "accountToolStripMenuItem";
-            this.accountToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
-            this.accountToolStripMenuItem.Text = "Accounts";
             // 
-            // newAccountToolStripMenuItem
+            this.ribbon1.OrbDropDown.BorderRoundness = 8;
+            this.ribbon1.OrbDropDown.Location = new System.Drawing.Point(0, 0);
+            this.ribbon1.OrbDropDown.Name = "";
+            this.ribbon1.OrbDropDown.Size = new System.Drawing.Size(527, 72);
+            this.ribbon1.OrbDropDown.TabIndex = 0;
+            this.ribbon1.RibbonTabFont = new System.Drawing.Font("Trebuchet MS", 9F);
+            this.ribbon1.Size = new System.Drawing.Size(601, 136);
+            this.ribbon1.TabIndex = 1;
+            this.ribbon1.Tabs.Add(this.accountTab);
+            this.ribbon1.Tabs.Add(this.systemTab);
+            this.ribbon1.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
+            this.ribbon1.Text = "ribbon1";
             // 
-            this.newAccountToolStripMenuItem.Name = "newAccountToolStripMenuItem";
-            this.newAccountToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newAccountToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.newAccountToolStripMenuItem.Text = "New Account";
-            this.newAccountToolStripMenuItem.Click += new System.EventHandler(this.NewAccountToolStripMenuItem_Click);
+            // accountTab
             // 
-            // systemToolStripMenuItem
+            this.accountTab.Name = "accountTab";
+            this.accountTab.Panels.Add(this.ribbonPanel2);
+            this.accountTab.Text = "Account";
             // 
-            this.systemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.quitToolStripMenuItem});
-            this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
-            this.systemToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.systemToolStripMenuItem.Text = "System";
+            // ribbonPanel2
             // 
-            // quitToolStripMenuItem
+            this.ribbonPanel2.ButtonMoreVisible = false;
+            this.ribbonPanel2.Items.Add(this.addAccButton);
+            this.ribbonPanel2.Name = "ribbonPanel2";
+            this.ribbonPanel2.Text = "";
             // 
-            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.quitToolStripMenuItem.Text = "Quit";
-            this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
+            // addAccButton
             // 
-            // aboutToolStripMenuItem
+            this.addAccButton.Image = global::Bank.Properties.Resources.plus__1_;
+            this.addAccButton.LargeImage = global::Bank.Properties.Resources.plus__1_;
+            this.addAccButton.Name = "addAccButton";
+            this.addAccButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("addAccButton.SmallImage")));
+            this.addAccButton.Text = "New";
+            this.addAccButton.Click += new System.EventHandler(this.NewAccountRibbonButton_Click);
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
+            // systemTab
             // 
-            // listToolStripMenuItem
+            this.systemTab.Name = "systemTab";
+            this.systemTab.Panels.Add(this.ribbonPanel1);
+            this.systemTab.Text = "System";
             // 
-            this.listToolStripMenuItem.Name = "listToolStripMenuItem";
-            this.listToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.listToolStripMenuItem.Text = "List";
+            // ribbonPanel1
+            // 
+            this.ribbonPanel1.Items.Add(this.quitButton);
+            this.ribbonPanel1.Name = "ribbonPanel1";
+            this.ribbonPanel1.Text = "";
+            // 
+            // quitButton
+            // 
+            this.quitButton.Image = global::Bank.Properties.Resources.plus__1_;
+            this.quitButton.LargeImage = global::Bank.Properties.Resources.plus__1_;
+            this.quitButton.Name = "quitButton";
+            this.quitButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("quitButton.SmallImage")));
+            this.quitButton.Text = "Quit";
+            this.quitButton.Click += new System.EventHandler(this.QuitRibbonButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(601, 450);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.ribbon1);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Bank (Admin)";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem accountToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newAccountToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listToolStripMenuItem;
+        private System.Windows.Forms.Ribbon ribbon1;
+        private System.Windows.Forms.RibbonTab accountTab;
+        private System.Windows.Forms.RibbonTab systemTab;
+        private System.Windows.Forms.RibbonPanel ribbonPanel1;
+        private System.Windows.Forms.RibbonButton quitButton;
+        private System.Windows.Forms.RibbonPanel ribbonPanel2;
+        private System.Windows.Forms.RibbonButton addAccButton;
     }
 }
 
