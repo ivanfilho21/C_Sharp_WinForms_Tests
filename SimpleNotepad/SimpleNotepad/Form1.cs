@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Printing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -127,14 +129,20 @@ namespace SimpleNotepad
             SaveFile(true);
         }
 
-        private void pageSetupToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PageSetupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.pageSetupDialog.PageSettings = new PageSettings();
+            this.pageSetupDialog.PrinterSettings = this.printDocument.PrinterSettings;
+            this.pageSetupDialog.ShowDialog();
+            if (this.pageSetupDialog.PageSettings != null)
+            {
+                this.printDocument.DefaultPageSettings = this.pageSetupDialog.PageSettings;
+            }
         }
 
-        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PrintToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            // TODO...
         }
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -189,9 +197,23 @@ namespace SimpleNotepad
 
         }
 
-        private void gotoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GotoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            GotoForm form = new GotoForm(CurrentLineIndex() + 1)
+            {
+                MinimizeBox = false,
+                MaximizeBox = false
+            };
 
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                int lineNumber = form.LineNumber - 1;
+                if (lineNumber < 0 || lineNumber >= richTextBox.Lines.Length) return;
+
+                int index = richTextBox.GetFirstCharIndexFromLine(lineNumber);
+                richTextBox.Select(index, 0);
+            }
+            form.Dispose();
         }
 
         private void SelectAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -199,9 +221,11 @@ namespace SimpleNotepad
             richTextBox.SelectAll();
         }
 
-        private void dateTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DateTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            StringBuilder sb = new StringBuilder();
+            sb.Append(DateTime.Now.ToShortTimeString()).Append(" ").Append(DateTime.Now.ToShortDateString());
+            richTextBox.SelectedText = sb.ToString();
         }
 
         private void WordWrapToolStripMenuItem_Click(object sender, EventArgs e)
@@ -221,7 +245,8 @@ namespace SimpleNotepad
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Developed by Ivan.", "About");
+            String iconMsg = "Application Icon made by \"SmashIcons\" at: https://www.flaticon.com/authors/smashicons";
+            MessageBox.Show("Developed by Ivan.\n\n" + iconMsg, "About");
         }
 
         private void RichTextBox_TextChanged(object sender, EventArgs e)
@@ -250,5 +275,20 @@ namespace SimpleNotepad
             richTextBox.Focus();
         }
 
+        private int CurrentLineIndex()
+        {
+            int index = richTextBox.SelectionStart;
+            return richTextBox.GetLineFromCharIndex(index);
+        }
+
+        private int CurrentColumnIndex()
+        {
+            int index = richTextBox.SelectionStart;
+            int line = CurrentLineIndex();
+            
+            int firstChar = richTextBox.GetFirstCharIndexFromLine(line);
+            return index - firstChar;
+        }
+        
     }
 }

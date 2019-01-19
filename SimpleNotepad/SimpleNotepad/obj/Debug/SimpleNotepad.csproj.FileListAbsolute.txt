@@ -7,3 +7,5 @@ c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.c
 c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.csproj.CoreCompileInputs.cache
 c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.exe
 c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.pdb
+C:\Users\Ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.FindReplaceForm.resources
+C:\Users\Ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.GotoForm.resources
