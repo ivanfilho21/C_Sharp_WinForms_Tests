@@ -54,13 +54,17 @@ namespace Calculator
             this.button3 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Controls.Add(this.button23);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.button22);
@@ -87,13 +91,12 @@ namespace Calculator
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(273, 254);
+            this.panel1.Size = new System.Drawing.Size(274, 277);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
             // button23
             // 
-            this.button23.Enabled = false;
             this.button23.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button23.Location = new System.Drawing.Point(216, 99);
             this.button23.Name = "button23";
@@ -112,7 +115,7 @@ namespace Calculator
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(249, 43);
             this.panel2.TabIndex = 25;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel2_Paint);
             // 
             // resultLabel
             // 
@@ -150,7 +153,6 @@ namespace Calculator
             this.delButton.TabStop = false;
             this.delButton.Text = "DEL";
             this.delButton.UseVisualStyleBackColor = true;
-            this.delButton.Click += new System.EventHandler(this.DelButtonClick);
             // 
             // clearButton
             // 
@@ -175,7 +177,6 @@ namespace Calculator
             this.percentButton.TabStop = false;
             this.percentButton.Text = "%";
             this.percentButton.UseVisualStyleBackColor = true;
-            this.percentButton.Click += new System.EventHandler(this.PercentButtonClick);
             this.percentButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperandButtonMouseClick);
             // 
             // decimalButton
@@ -188,7 +189,6 @@ namespace Calculator
             this.decimalButton.TabStop = false;
             this.decimalButton.Text = ",";
             this.decimalButton.UseVisualStyleBackColor = true;
-            this.decimalButton.Click += new System.EventHandler(this.DecimalButtonClick);
             // 
             // button10
             // 
@@ -286,7 +286,6 @@ namespace Calculator
             this.ceButton.TabStop = false;
             this.ceButton.Text = "CE";
             this.ceButton.UseVisualStyleBackColor = true;
-            this.ceButton.Click += new System.EventHandler(this.CE_ButtonClick);
             // 
             // button2
             // 
@@ -384,12 +383,31 @@ namespace Calculator
             this.button6.UseVisualStyleBackColor = true;
             this.button6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NumberButtonMouseClick);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 255);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(274, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 28;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Always;
+            this.statusLabel.Size = new System.Drawing.Size(42, 17);
+            this.statusLabel.Text = "Debug";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(273, 254);
+            this.ClientSize = new System.Drawing.Size(274, 277);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -399,7 +417,10 @@ namespace Calculator
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -431,6 +452,8 @@ namespace Calculator
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label resultLabel;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
     }
 }
 

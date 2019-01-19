@@ -11,22 +11,20 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
-        private const int MAX_LENGTH = 15;
-
         enum Operation
         {
-            None, Addition, Subtraction, Multiplication, Division, Error, Percentage
+            Non, Add, Sub, Mul, Div, Sqrt
         }
 
-        private Operation _operation;
-        private Operand[] operand = new Operand[2];
-        private int currIndex;
-        private bool canAppend;
-        private bool finishedOperation;
+        private Operation operation;
+        private int currentOperandIndex;
+        private double[] operand = new double[2];
+        private bool canAppend, shouldChangeOperator;
 
         public Form1()
         {
             InitializeComponent();
+            Initialize();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,14 +34,39 @@ namespace Calculator
             clearButton.PerformClick();
         }
 
-        private void InitializeOperands()
+        private void Initialize()
         {
-            for (var i = 0; i < operand.Length; i++)
-                operand[i] = new Operand();
-            currIndex = 0;
+            operand[0] = 0;
+            operand[1] = Double.NaN;
+
+            operation = Operation.Non;
+
+            currentOperandIndex = 0;
+            canAppend = true;
+
+            // Update result label
+            resultLabel.Text = operand[0].ToString();
+
+            // Debugging Label
+            UpdateDebuggingLabel();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void UpdateDebuggingLabel()
+        {
+            string op2 = operand[1].ToString();
+            if (Double.IsNaN(operand[1])) op2 = "NaN";
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Ind:" + currentOperandIndex + " ")
+                .Append("Op:" + operation.ToString() + " ")
+                .Append("Op1:" + operand[0] + " ")
+                .Append("Op2:" + op2 + "");
+
+            String text = sb.ToString();
+            statusLabel.Text = text;
+        }
+
+        private void Panel1_Paint(object sender, PaintEventArgs e)
         {
             using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle,
                                                                Color.WhiteSmoke,
@@ -54,9 +77,9 @@ namespace Calculator
             }
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
+        private void Panel2_Paint(object sender, PaintEventArgs e)
         {
-            
+
             using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle,
                                                                Color.WhiteSmoke,
                                                                Color.FromArgb(208, 219, 219),
@@ -68,18 +91,16 @@ namespace Calculator
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-
             Keys[] numKeys = { Keys.D0, Keys.NumPad0, Keys.D1, Keys.NumPad1, Keys.D2, Keys.NumPad2,
                 Keys.D3, Keys.NumPad3, Keys.D4, Keys.NumPad4, Keys.D5, Keys.NumPad5, Keys.D6,
                 Keys.NumPad6, Keys.D7, Keys.NumPad7, Keys.D8, Keys.NumPad8, Keys.D9, Keys.NumPad9 };
 
-            Keys[] opKeys = { Keys.Add, Keys.Subtract, Keys.Multiply, Keys.Divide,
-                Keys.Oemplus, Keys.OemMinus, Keys.ShiftKey | Keys.D8, Keys.OemBackslash };
+            Keys[] opKeys = { Keys.Add, Keys.Subtract, Keys.Multiply, Keys.Divide, Keys.Oemplus,
+                Keys.OemMinus, Keys.ShiftKey | Keys.D8, Keys.OemBackslash };
 
             Button b = new Button();
             var kc = e.KeyCode;
 
-            // TODO: replace this with Default Confirm Button in WinForms
             if (kc == Keys.Enter || kc == Keys.Return)
             {
                 resultButton.PerformClick();
@@ -92,8 +113,9 @@ namespace Calculator
                 return;
             }
 
-            if (kc == Keys.Delete) // CE button 
+            if (kc == Keys.Delete)
             {
+                // Todo
                 return;
             }
 
@@ -106,248 +128,156 @@ namespace Calculator
                     else if (kc == Keys.Multiply || (kc == Keys.D8 && e.Shift)) b.Text = "*";
                     else if (kc == Keys.Divide || kc == Keys.OemBackslash) b.Text = "/";
                     else if (kc == Keys.D8) break;
-                    
+
                     OperandButtonMouseClick(b, null);
                     return;
                 }
             }
-
+            
             for (var i = 0; i < numKeys.Length; i++)
             {
                 if (kc == numKeys[i])
                 {
-                    b.Text = DecodeKeyText(kc.ToString());
+                    String text = kc.ToString();
+                    text = text.Substring(text.Length - 1);
+                    b.Text = text;
                     NumberButtonMouseClick(b, null);
                     return;
                 }
             }
         }
 
-        private string DecodeKeyText(string text)
+        private void ClearButtonClick(object sender, EventArgs e)
         {
-            return text.Substring(text.Length - 1);
-        }
-
-        private void NumberButtonMouseClick(object sender, MouseEventArgs e)
-        {
-            Button b = (Button)sender;
-            var buttonText = b.Text;
-
-            if (_operation == Operation.Error)
-            {
-                InitializeOperands();
-                canAppend = false;
-            }
-
-            if (resultLabel.Text == "0") resultLabel.Text = "";
-
-            if (canAppend)// Apeending numbers.
-            {
-                resultLabel.Text += buttonText;
-            }
-            else // Sets current operand value.  
-            {
-                resultLabel.Text = buttonText;
-                canAppend = true; // Must append from now on.
-            }
-
-            operand[currIndex].Value = Double.Parse(resultLabel.Text);
-
-            LoseFocus();
-        }
-
-        private void OperandButtonMouseClick(object sender, MouseEventArgs e)
-        {
-            Button b = (Button)sender;
-
-            switch (b.Text)
-            {
-                case "+":
-                    ChangeOperation(Operation.Addition); break;
-                case "-":
-                    ChangeOperation(Operation.Subtraction); break;
-                case "*":
-                    ChangeOperation(Operation.Multiplication); break;
-                case "/":
-                    ChangeOperation(Operation.Division); break;
-                default:
-                    // Debug
-                    // MessageBox.Show("Invalid option: " + b.Text, "OperandButtonMouseClick");
-                    return;
-            }
-
-            if (finishedOperation)// && operand[1].HasValue) // may be redundant
-            {
-                operand[1] = new Operand();
-                finishedOperation = false;
-            }
-
-            currIndex = operand[0].HasValue ? 1 : 0;
-            canAppend = false;
-            
-            DoOperation(false, false);
-
-            LoseFocus();
-        }
-
-        private void PercentButtonClick(object sender, EventArgs e)
-        {
-            DoOperation(false, false);
-            operand[0].Value /= 100;
-            resultLabel.Text = "" + operand[0].Value;
-        }
-
-        private bool ChangeOperation(Operation op)
-        {
-            if (_operation == Operation.None || finishedOperation)
-            {
-                _operation = op;
-                return true;
-            }
-            else
-            {
-                DoOperation(false, true);
-                operand[1] = new Operand();
-                _operation = op;
-
-                finishedOperation = false;
-            }
-            return false;
-        }
-        
-        private void DoOperation(bool sourceResult, bool sourceChangeOp)
-        {
-            double n2 = 0;
-            
-            if (operand[1].HasValue)
-                n2 = operand[1].Value;
-            else
-            {
-                if (_operation == Operation.Division)
-                {
-                    if (sourceResult)
-                    {
-                        operand[1].Value = operand[0].Value;
-                        operand[0].Value = 1;
-                        n2 = operand[1].Value;
-                    }
-                    else
-                    {
-                        n2 = 1;
-                    }
-                        //n2 = 1;
-                }
-                else if (_operation == Operation.Multiplication) n2 = 1;
-            }
-
-            double result = 0;
-
-            switch (_operation)
-            {
-                case Operation.Addition:
-                    result = operand[0].Value + n2;
-                    break;
-                case Operation.Subtraction:
-                    result = operand[0].Value - n2;
-                    break;
-                case Operation.Multiplication:
-                    result = operand[0].Value * n2;
-                    break;
-                case Operation.Division:
-                    if (n2 != 0)
-                        result = operand[0].Value / n2;
-                    else
-                    {
-                        resultLabel.Text = "Cannot divide by zero.";
-                        _operation = Operation.Error;
-                        return;
-                    }
-                    break;
-            }
-
-            if (sourceResult)
-                canAppend = false;
-            
-            resultLabel.Text = "" + result; //operand[0].Value;
-
-            if (operand[1].HasValue)
-            {
-                //if (_operation != Operation.mult)
-                finishedOperation = true;
-            }
-            
-            if (_operation == Operation.Multiplication && !sourceChangeOp) // maybe verify finished operation...
-                operand[1].Value = result;
-            else
-                operand[0].Value = result;
+            Initialize();
         }
 
         private void ResultButtonClick(object sender, EventArgs e)
         {
-            DoOperation(true, false);
-
-            LoseFocus();
+            DoOperation(true);
         }
 
-        private void ClearButtonClick(object sender, EventArgs e)
+        private void NumberButtonMouseClick(object sender, MouseEventArgs e)
         {
-            InitializeOperands();
-            _operation = Operation.None;
+            string buttonText = ((Button)sender).Text;
+            AssignCurrentOperand(Double.Parse(buttonText));
+        }
+
+        private void OperandButtonMouseClick(object sender, MouseEventArgs e)
+        {
+            string buttonText = ((Button)sender).Text;
+
+            switch (buttonText)
+            {
+                case "+": AssignOperation(Operation.Add); break;
+                case "-": AssignOperation(Operation.Sub); break;
+                case "*": AssignOperation(Operation.Mul); break;
+                case "/": AssignOperation(Operation.Div); break;
+                case "%":
+                    if (operation != Operation.Non)
+                        operand[1] = (operand[1] / 100) * operand[0];
+                    else
+                        clearButton.PerformClick();
+                    break;
+                case "√": AssignOperation(Operation.Sqrt); operand[1] = 0; break;
+            }
+
+            if (shouldChangeOperator)
+            {
+                shouldChangeOperator = false;
+                operand[1] = Double.NaN;
+
+                // Debug
+                UpdateDebuggingLabel();
+
+                return;
+            }
+
+            DoOperation(false);
+        }
+
+        private void AssignCurrentOperand(double number)
+        {
+            string result = "";
+
+            if (operand[currentOperandIndex] == 0 || Double.IsNaN(operand[currentOperandIndex]))
+                resultLabel.Text = "";
+            if (canAppend) result = resultLabel.Text;
+            result += number.ToString();
+
+            resultLabel.Text = result;
+            operand[currentOperandIndex] = Double.Parse(resultLabel.Text);
             canAppend = true;
-            finishedOperation = false;
 
-            resultLabel.Text = "" + 0;
-
-            LoseFocus();
+            // Debug
+            UpdateDebuggingLabel();
         }
 
-        private void CE_ButtonClick(object sender, EventArgs e)
+        private void AssignOperation(Operation operation)
         {
-
-        }
-
-        private void DelButtonClick(object sender, EventArgs e)
-        {
-            
-            if (resultLabel.Text.Length > 1)
-                resultLabel.Text = resultLabel.Text.Substring(0, resultLabel.Text.Length - 1);
+            if (Double.IsNaN(operand[1]) || shouldChangeOperator)
+            {
+                this.operation = operation;
+            }
             else
-                clearButton.PerformClick();
-
-            try
             {
-                AssignToOperand();
+                DoOperation(false);
+                this.operation = operation;
             }
-            catch (System.FormatException)
+
+            if (this.operation != Operation.Sqrt) currentOperandIndex = 1;
+
+            // Debug
+            UpdateDebuggingLabel();
+        }
+
+        private void DoOperation(bool resultButtonSource)
+        {
+            if (Double.IsNaN(operand[1])) return;
+
+            double r = 0, o1 = operand[0], o2 = operand[1];
+
+            if (Double.IsNaN(o2))
             {
-                resultLabel.Text = "" + 0;
+                o2 = 0;
+
+                if (operation == Operation.Mul || operation == Operation.Div)
+                    o2 = 1;
             }
-            finally
+
+            switch(operation)
             {
-                AssignToOperand();
+                case Operation.Add: r = o1 + o2; break;
+                case Operation.Sub: r = o1 - o2; break;
+                case Operation.Mul: r = o1 * o2; break;
+                case Operation.Div: r = o1 / o2; break;
+                case Operation.Sqrt:
+                    r = Math.Sqrt(o1);
+                    break;
+                case Operation.Non: break;
+                default: return;
             }
-            
-            LoseFocus();
-        }
+            resultLabel.Text = r.ToString();
 
-        private void AssignToOperand()
-        {
-            if (finishedOperation)
-                operand[0].Value = Double.Parse(resultLabel.Text);
-            else
-                operand[currIndex].Value = Double.Parse(resultLabel.Text);
-        }
+            // Result to op1
+            operand[0] = r;
 
-        private void DecimalButtonClick(object sender, EventArgs e)
-        {
-            LoseFocus();
-        }
+            // NaN to op2
+            operand[1] = Double.NaN;
+            //
 
-        private void LoseFocus()
-        {
-            panel1.Focus();
-        }
+            if (resultButtonSource)
+            {
+                operand[1] = o2;
+                shouldChangeOperator = true;
+            }
 
+            // Debug
+            UpdateDebuggingLabel();
+            //
+            //MessageBox.Show("op1 " + operand[0]);
+        }
+        
     }
 
 }
