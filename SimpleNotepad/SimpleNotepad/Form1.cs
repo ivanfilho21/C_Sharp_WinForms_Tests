@@ -256,8 +256,12 @@ namespace SimpleNotepad
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String iconMsg = "Application Icon made by \"SmashIcons\" at: https://www.flaticon.com/authors/smashicons";
-            MessageBox.Show("Developed by Ivan.\n\n" + iconMsg, "About");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Developed by Ivan21.\n\n")
+                .Append("Icon art by SmashIcons at https://www.flaticon.com/authors/smashicons").Append(".\n")
+                .Append("Icon converted at https://icoconvert.com").Append(".");
+            string msg = sb.ToString();
+            MessageBox.Show(msg, PROGRAM_NAME);
         }
 
         private void RichTextBox_TextChanged(object sender, EventArgs e)
