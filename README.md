@@ -18,7 +18,7 @@ I am making these projects so I can learn the basics of Winforms and Visual Stud
 
 <div align="center">
   <h4>Screenshot</h4>
-  <img src="https://i.postimg.cc/tJV6FHpV/calculator1.png" </img> 
+  <img src="https://i.postimg.cc/cJ5N5sqL/calculator1.png" </img> 
 </div>
 
 <h3>SimpleNotepad:</h3>
