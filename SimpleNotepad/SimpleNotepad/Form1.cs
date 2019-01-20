@@ -20,6 +20,8 @@ namespace SimpleNotepad
         private string fileName;
         private string fileFullPath;
 
+        public RichTextBox RichTextBox { get; private set; }
+
         public Form1()
         {
             InitializeComponent();
@@ -28,6 +30,8 @@ namespace SimpleNotepad
             UpdateTitle();
 
             pasteToolStripMenuItem.Enabled = Clipboard.ContainsText();
+
+            RichTextBox = richTextBox;
         }
 
         private void UpdateTitle()
@@ -182,19 +186,26 @@ namespace SimpleNotepad
             richTextBox.SelectedText = "";
         }
 
-        private void findToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FindToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OpenFindReplaceForm("find");
         }
 
-        private void findNextToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FindNextToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OpenFindReplaceForm("findNext");
         }
 
-        private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ReplaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenFindReplaceForm("replace");
+        }
 
+        private void OpenFindReplaceForm(string source)
+        {
+            FindReplaceForm form = new FindReplaceForm( this, source ) { MinimizeBox = false, MaximizeBox = false };
+            this.AddOwnedForm(form);
+            form.Show();
         }
 
         private void GotoToolStripMenuItem_Click(object sender, EventArgs e)
