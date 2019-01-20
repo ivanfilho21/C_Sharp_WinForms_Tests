@@ -29,15 +29,16 @@ namespace Calculator
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.button23 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.resultLabel = new System.Windows.Forms.Label();
-            this.button22 = new System.Windows.Forms.Button();
             this.delButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
             this.percentButton = new System.Windows.Forms.Button();
-            this.decimalButton = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -54,11 +55,12 @@ namespace Calculator
             this.button3 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -67,11 +69,9 @@ namespace Calculator
             this.panel1.Controls.Add(this.statusStrip1);
             this.panel1.Controls.Add(this.button23);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.button22);
             this.panel1.Controls.Add(this.delButton);
             this.panel1.Controls.Add(this.clearButton);
             this.panel1.Controls.Add(this.percentButton);
-            this.panel1.Controls.Add(this.decimalButton);
             this.panel1.Controls.Add(this.button10);
             this.panel1.Controls.Add(this.button13);
             this.panel1.Controls.Add(this.button12);
@@ -89,16 +89,35 @@ namespace Calculator
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button6);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(274, 277);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 255);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(274, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 28;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Always;
+            this.statusLabel.Size = new System.Drawing.Size(42, 17);
+            this.statusLabel.Text = "Debug";
+            // 
             // button23
             // 
             this.button23.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button23.Location = new System.Drawing.Point(216, 99);
+            this.button23.Location = new System.Drawing.Point(216, 136);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(45, 32);
             this.button23.TabIndex = 27;
@@ -128,31 +147,18 @@ namespace Calculator
             this.resultLabel.Text = "0";
             this.resultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // button22
-            // 
-            this.button22.Enabled = false;
-            this.button22.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button22.Location = new System.Drawing.Point(216, 136);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(45, 32);
-            this.button22.TabIndex = 24;
-            this.button22.TabStop = false;
-            this.button22.Text = "±";
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperandButtonMouseClick);
-            // 
             // delButton
             // 
-            this.delButton.Enabled = false;
             this.delButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.delButton.ForeColor = System.Drawing.Color.Red;
-            this.delButton.Location = new System.Drawing.Point(114, 61);
+            this.delButton.Location = new System.Drawing.Point(165, 61);
             this.delButton.Name = "delButton";
             this.delButton.Size = new System.Drawing.Size(96, 32);
             this.delButton.TabIndex = 23;
             this.delButton.TabStop = false;
             this.delButton.Text = "DEL";
             this.delButton.UseVisualStyleBackColor = true;
+            this.delButton.Click += new System.EventHandler(this.DelButtonClick);
             // 
             // clearButton
             // 
@@ -160,7 +166,7 @@ namespace Calculator
             this.clearButton.ForeColor = System.Drawing.Color.Red;
             this.clearButton.Location = new System.Drawing.Point(12, 61);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(45, 32);
+            this.clearButton.Size = new System.Drawing.Size(96, 32);
             this.clearButton.TabIndex = 22;
             this.clearButton.TabStop = false;
             this.clearButton.Text = "C";
@@ -170,7 +176,7 @@ namespace Calculator
             // percentButton
             // 
             this.percentButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.percentButton.Location = new System.Drawing.Point(216, 61);
+            this.percentButton.Location = new System.Drawing.Point(216, 99);
             this.percentButton.Name = "percentButton";
             this.percentButton.Size = new System.Drawing.Size(45, 32);
             this.percentButton.TabIndex = 18;
@@ -179,23 +185,12 @@ namespace Calculator
             this.percentButton.UseVisualStyleBackColor = true;
             this.percentButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OperandButtonMouseClick);
             // 
-            // decimalButton
-            // 
-            this.decimalButton.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.decimalButton.Location = new System.Drawing.Point(114, 212);
-            this.decimalButton.Name = "decimalButton";
-            this.decimalButton.Size = new System.Drawing.Size(45, 32);
-            this.decimalButton.TabIndex = 21;
-            this.decimalButton.TabStop = false;
-            this.decimalButton.Text = ",";
-            this.decimalButton.UseVisualStyleBackColor = true;
-            // 
             // button10
             // 
             this.button10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button10.Location = new System.Drawing.Point(12, 212);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(96, 32);
+            this.button10.Size = new System.Drawing.Size(147, 32);
             this.button10.TabIndex = 19;
             this.button10.TabStop = false;
             this.button10.Text = "0";
@@ -279,7 +274,7 @@ namespace Calculator
             // 
             this.ceButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ceButton.ForeColor = System.Drawing.Color.Red;
-            this.ceButton.Location = new System.Drawing.Point(63, 61);
+            this.ceButton.Location = new System.Drawing.Point(114, 61);
             this.ceButton.Name = "ceButton";
             this.ceButton.Size = new System.Drawing.Size(45, 32);
             this.ceButton.TabIndex = 15;
@@ -383,33 +378,34 @@ namespace Calculator
             this.button6.UseVisualStyleBackColor = true;
             this.button6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NumberButtonMouseClick);
             // 
-            // statusStrip1
+            // menuStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 255);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(274, 22);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.TabIndex = 28;
-            this.statusStrip1.Text = "statusStrip1";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(274, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // statusLabel
+            // aboutToolStripMenuItem
             // 
-            this.statusLabel.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Always;
-            this.statusLabel.Size = new System.Drawing.Size(42, 17);
-            this.statusLabel.Text = "Debug";
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(274, 277);
+            this.ClientSize = new System.Drawing.Size(274, 301);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -418,10 +414,13 @@ namespace Calculator
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -444,16 +443,16 @@ namespace Calculator
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button percentButton;
-        private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button delButton;
         private System.Windows.Forms.Button clearButton;
-        private System.Windows.Forms.Button decimalButton;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label resultLabel;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

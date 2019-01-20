@@ -152,6 +152,24 @@ namespace Calculator
             Initialize();
         }
 
+        private void DelButtonClick(object sender, EventArgs e)
+        {
+            string t = resultLabel.Text;
+            if (t.Length > 1)
+            {
+                t = t.Substring(0, t.Length - 1);
+            }
+            else
+            {
+                t = 0.ToString();
+            }
+            resultLabel.Text = t;
+            canAppend = false;
+
+            AssignCurrentOperand(Double.Parse(t));
+
+        }
+
         private void ResultButtonClick(object sender, EventArgs e)
         {
             DoOperation(true);
@@ -201,7 +219,9 @@ namespace Calculator
             string result = "";
 
             if (operand[currentOperandIndex] == 0 || Double.IsNaN(operand[currentOperandIndex]))
+            {
                 resultLabel.Text = "";
+            }
             if (canAppend) result = resultLabel.Text;
             result += number.ToString();
 
@@ -230,7 +250,7 @@ namespace Calculator
             // Debug
             UpdateDebuggingLabel();
         }
-
+    
         private void DoOperation(bool resultButtonSource)
         {
             if (Double.IsNaN(operand[1])) return;
@@ -251,9 +271,7 @@ namespace Calculator
                 case Operation.Sub: r = o1 - o2; break;
                 case Operation.Mul: r = o1 * o2; break;
                 case Operation.Div: r = o1 / o2; break;
-                case Operation.Sqrt:
-                    r = Math.Sqrt(o1);
-                    break;
+                case Operation.Sqrt: r = Math.Sqrt(o1); break;
                 case Operation.Non: break;
                 default: return;
             }
@@ -274,10 +292,18 @@ namespace Calculator
 
             // Debug
             UpdateDebuggingLabel();
-            //
-            //MessageBox.Show("op1 " + operand[0]);
         }
-        
+
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Developed by Ivan21.\n\n")
+                .Append("Icon art by SmashIcons at https://www.flaticon.com/authors/smashicons").Append(".\n")
+                .Append("Icon converted at https://icoconvert.com").Append(".");
+            string msg = sb.ToString();
+            MessageBox.Show(msg, "Calculator");
+        }
+
     }
 
 }
