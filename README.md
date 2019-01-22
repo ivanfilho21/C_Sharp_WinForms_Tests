@@ -24,9 +24,7 @@ I am making these projects so I can learn the basics of Winforms and Visual Stud
 </div>
 
 ### PrecedenceCalc
-* This project has the purpose of creating a Calculator that receives an arithmetic expression
-* as input and outputs the correct calculation, taking into account the order of the operators
-* used in the expression.
+* This project has the purpose of creating a Calculator that receives an arithmetic expression as input and outputs the correct calculation, taking into account the order of the operators used in the expression.
 > It's still in development.
 
 ### SimpleNotepad
