@@ -25,7 +25,15 @@ I am making these projects so I can learn the basics of Winforms and Visual Stud
 
 ### PrecedenceCalc
 * This project has the purpose of creating a Calculator that receives an arithmetic expression as input and outputs the correct calculation, taking into account the order of the operators used in the expression.
-> It's still in development.
+* Only these operators can be used at the moment: Plus ( + ), Minus ( - ), Times ( * or × ) and Divide ( / or ÷ ).
+* Parenthesis cannot be used to force a precedence.
+* An input such as "3 +" may cause an uncaught exception.
+> It still needs some adjustments.
+
+<div align="center">
+  <h4>Screenshot</h4>
+  <img src="https://i.postimg.cc/J4wn3x7y/precedence-Calc.png" </img>
+</div>
 
 ### SimpleNotepad
 * This program will be used to take simple notes in a rich text format.
