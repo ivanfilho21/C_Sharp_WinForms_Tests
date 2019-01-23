@@ -11,81 +11,36 @@ namespace PrecedenceCalc
     public partial class Form1 : Form
     {
         private const char NULL_CHAR = ' ';
+        private const string ERROR_MESSAGE = "Malformed Expression.";
+        private const string PROGRAM_NAME = "Arithmetic Precedence Calculator";
         private char[] ALL_REGEX = { '+', '-', '*', '×', '/', '÷' };
 
         public Form1()
         {
             InitializeComponent();
+            this.Text = PROGRAM_NAME;
         }
+
+        // TODO: Accept parenthesis as precedence modifier.
 
         private void DoButton_Click(object sender, EventArgs e)
         {
-            string txt = inputTextBox.Text;
-            char regex = GetRegex(txt);
-            string[] txtSplit = txt.Split(regex);
-
-            resultLabel.Text = "";
-
-            for (var i = 0; i < txtSplit.Length; i++)
-            {
-                txtSplit[i] = DecodeAux1(txtSplit[i]);
-            }
-
-            resultLabel.Text = DoOperation(txtSplit, regex);
+            resultLabel.Text = RecursiveCalc(inputTextBox.Text);
         }
-        
-        private string DecodeAux1(string txt)
+
+        private string RecursiveCalc(string txt)
         {
             char regex = GetRegex(txt);
             if (regex == NULL_CHAR) return txt;
 
             string[] txtSplit = txt.Split(regex);
-            string result = txtSplit[0];
 
             for (var i = 0; i < txtSplit.Length; i++)
             {
-                txtSplit[i] = DecodeAux2(txtSplit[i]);
+                txtSplit[i] = RecursiveCalc(txtSplit[i]);
             }
-            if (txtSplit.Length > 1)
-                result = DoOperation(txtSplit, regex);
 
-            return result;
-        }
-
-        private string DecodeAux2(string txt)
-        {
-            char regex = GetRegex(txt);
-            if (regex == NULL_CHAR) return txt;
-
-            string[] txtSplit = txt.Split(regex);
-            string result = txtSplit[0];
-
-            for (var i = 0; i < txtSplit.Length; i++)
-            {
-                txtSplit[i] = DecodeAux3(txtSplit[i]);
-            }
-            result = DoOperation(txtSplit, regex);
-
-            return result;
-        }
-
-        private string DecodeAux3(string txt)
-        {
-            char regex = GetRegex(txt);
-            if (regex == NULL_CHAR) return txt;
-
-            string[] txtSplit = txt.Split(regex);
-            string result = txtSplit[0];
-
-            for (var i = 0; i < txtSplit.Length; i++)
-            {
-                char reg = GetRegex(txtSplit[i]);
-                if (reg == NULL_CHAR) continue;
-            }
-            if (txtSplit.Length > 1)
-                result = DoOperation(txtSplit, regex);
-
-            return result;
+            return DoOperation(txtSplit, regex);
         }
 
         /**
@@ -104,12 +59,27 @@ namespace PrecedenceCalc
 
         private string DoOperation(string[] op, char symbol)
         {
-            double o1 = Double.Parse(op[0]), o2;
+            double o1, o2;
+            try
+            {
+                o1 = Double.Parse(op[0]);
+            }
+            catch (System.FormatException) { return ERROR_MESSAGE; }
 
             for (var i = 1; i < op.Length; i++)
             {
-                //MessageBox.Show("" + op[i]);
-                o2 = Double.Parse(op[i]);
+                try
+                {
+                    o2 = Double.Parse(op[i]);
+                }
+                catch (System.FormatException)
+                {
+                    if (symbol == ALL_REGEX[0] || symbol == ALL_REGEX[1])
+                        o2 = 0;
+                    else
+                        o2 = 1;
+                }
+                
                 o1 = Calculate(o1, o2, symbol);
             }
 
@@ -136,6 +106,15 @@ namespace PrecedenceCalc
 
             return Double.NaN;
         }
-        
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Developed by Ivan21.\n\n")
+                .Append("Icon art by RoundIcons at https://www.flaticon.com/authors/roundicons").Append(".\n")
+                .Append("Icon converted at https://icoconvert.com").Append(".");
+            string msg = sb.ToString();
+            MessageBox.Show(msg, PROGRAM_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }
