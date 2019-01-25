@@ -116,5 +116,36 @@ namespace PrecedenceCalc
             string msg = sb.ToString();
             MessageBox.Show(msg, PROGRAM_NAME, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        // Adds a decimal point to the input text.
+        private void TestButton_Click(object sender, EventArgs e)
+        {
+            string t = inputTextBox.Text;
+            string d = ",";
+            
+            int end = 0;
+
+            for (int i = 0; i < t.Length; i++)
+            {
+                if (i == t.Length - 1) break;
+                foreach (char regex in ALL_REGEX)
+                {
+                    if (t[i + 1].Equals(regex))
+                    {
+                        end = i + 1;
+                        break;
+                    }
+                }
+            }
+            
+            string last = t.Substring(end + 1);
+            t = t.Substring(0, end + 1);
+
+            if (!last.Contains(d))
+                last += d;
+
+            t += last;
+            inputTextBox.Text = t;
+        }
     }
 }
