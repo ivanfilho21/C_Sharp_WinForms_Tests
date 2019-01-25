@@ -10,11 +10,11 @@ namespace SimpleNotepad
 {
     public partial class FindReplaceForm : Form
     {
-        private Form1 parent;
+        private MainForm parent;
         private int startIndex = 0, selectStart = -1;
         private string findTxt, replaceTxt, sourceText;
 
-        public FindReplaceForm(Form1 parent, string source)
+        public FindReplaceForm(MainForm parent, string source)
         {
             InitializeComponent();
             this.parent = parent;

@@ -1,7 +1,6 @@
 c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\bin\Debug\SimpleNotepad.exe
 c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\bin\Debug\SimpleNotepad.pdb
 c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.csprojAssemblyReference.cache
-c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.Form1.resources
 c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.Properties.Resources.resources
 c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.csproj.GenerateResource.cache
 c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.csproj.CoreCompileInputs.cache
@@ -9,3 +8,4 @@ c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.e
 c:\users\ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.pdb
 C:\Users\Ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.FindReplaceForm.resources
 C:\Users\Ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.GotoForm.resources
+C:\Users\Ivan\source\repos\SimpleNotepad\SimpleNotepad\obj\Debug\SimpleNotepad.MainForm.resources
